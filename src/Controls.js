@@ -7,10 +7,16 @@ export default class Controls extends Component {
       title: '',
       body: ''
     }
+    this.submitIdea = this.submitIdea.bind(this)
   }
 
   handleChange(thing, e) {
     this.setState({ [thing]: e.target.value })
+  }
+
+  submitIdea() {
+    this.props.addIdea(this.state)
+    this.setState({ title: '', body: '' })
   }
 
   render() {
@@ -24,7 +30,7 @@ export default class Controls extends Component {
                value={ this.state.body }
                onChange={ e => this.handleChange('body', e) }/>
 
-        <button onClick={ this.props.addIdea }>Submit</button>
+        <button onClick={ this.submitIdea }>Submit</button>
       </div>
     )
   }
