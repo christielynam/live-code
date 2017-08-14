@@ -17,12 +17,19 @@ class App extends Component {
     this.setState({ ideas: newTruth })
   }
 
+  deleteIdea(id) {
+    console.log('firrrrreeed!');
+    const filteredIdeas = this.state.ideas.filter(idea => idea.id !== id)
+
+    this.setState({ ideas: filteredIdeas })
+  }
 
   render() {
     return (
       <div className="App">
         <Controls  addIdea={ this.addIdea.bind(this) } />
-        <IdeaList ideas={this.state.ideas} />
+        <IdeaList ideas={this.state.ideas}
+                  deleteIdea={this.deleteIdea.bind(this)} />
       </div>
     );
   }

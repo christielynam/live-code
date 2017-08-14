@@ -8,6 +8,7 @@ export default class Controls extends Component {
       body: ''
     }
     this.submitIdea = this.submitIdea.bind(this)
+    this.handleEnter = this.handleEnter.bind(this)
   }
 
   handleChange(thing, e) {
@@ -15,8 +16,15 @@ export default class Controls extends Component {
   }
 
   submitIdea() {
-    this.props.addIdea(this.state)
+    const idea = Object.assign({ id: Date.now() }, this.state)
+    this.props.addIdea(idea)
     this.setState({ title: '', body: '' })
+  }
+
+  handleEnter(e) {
+    if (e.keyCode === 13) {
+      this.submitIdea()
+    }
   }
 
   render() {
@@ -28,7 +36,8 @@ export default class Controls extends Component {
 
         <input placeholder='body'
                value={ this.state.body }
-               onChange={ e => this.handleChange('body', e) }/>
+               onChange={ e => this.handleChange('body', e) }
+               onKeyDown={ this.handleEnter }/>
 
         <button onClick={ this.submitIdea }>Submit</button>
       </div>
